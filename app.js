@@ -24,7 +24,6 @@ const database = [
 
 app.use('/user', (req, res) =>  {
   const id = req.query.id;
-  console.log('ID! ====>>>>', id);
   const user = database.find((i) => +i.id === +id);
   if (user) {
     res.send(user);
