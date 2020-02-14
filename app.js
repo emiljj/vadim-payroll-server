@@ -1,13 +1,14 @@
 const express = require('express');
-
 const payeeRouter = require('./routers/payee.router');
-
-const PORT = 3001;
+const connectDB = require('./db/connection');
+const config = require('./config');
 
 const app = express();
 
+connectDB();
+
 app.use('/payee', payeeRouter);
 
-app.listen(PORT, () => {
-  console.log(`Server running on port: ${PORT}`);
+app.listen(config.appPort, () => {
+  console.log(`Server running on port: ${config.appPort}`);
 })
