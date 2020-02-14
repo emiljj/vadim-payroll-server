@@ -9,7 +9,8 @@ payeeRouter.get('/', async (req, res) => {
 });
 
 payeeRouter.post('/', async (req, res) => {
-  const result = await Payee.create({ name: 'Valeriy', age: 33 });
+  console.log('Body =====>>>>> ', req.body);
+  const result = await Payee.create(req.body);
   res.send(result);
 });
 
