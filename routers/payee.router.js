@@ -9,17 +9,20 @@ payeeRouter.get('/', async (req, res) => {
 });
 
 payeeRouter.post('/', async (req, res) => {
-  console.log('Body =====>>>>> ', req.body);
   const result = await Payee.create(req.body);
   res.send(result);
 });
 
-payeeRouter.put('/', (req, res) => {
-  res.send('update Vasya!!!');
+payeeRouter.put('/:id', async (req, res) => {
+  const id = req.params.id;
+  const result = await Payee.findByIdAndUpdate(id,req.body);
+  res.send(result);
 });
 
-payeeRouter.delete('/', (req, res) => {
-  res.send('Vasya delete!!!');
+payeeRouter.delete('/:id', async (req, res) => {
+  const id = req.params.id;
+  const result = await Payee.findByIdAndDelete(id);
+  res.send(result);
 });
 
 module.exports = payeeRouter;
