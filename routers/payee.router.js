@@ -20,9 +20,10 @@ payeeRouter.put('/:id', async (req, res) => {
 });
 
 payeeRouter.delete('/:id', async (req, res) => {
-  const id = req.params.id;
-  const result = await Payee.findByIdAndDelete(id);
-  res.send(result);
+  const paramsId = req.params.id;
+  const result = await Payee.findOneAndDelete({ _id: paramsId });
+  const id = result.id;
+  res.send(id);
 });
 
 module.exports = payeeRouter;
