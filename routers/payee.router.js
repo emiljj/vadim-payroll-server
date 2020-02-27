@@ -15,6 +15,7 @@ payeeRouter.get('/:id', async (req, res) => {
 });
 
 payeeRouter.post('/', async (req, res) => {
+  console.log(req.body.roles);
   const result = await Payee.create(req.body);
   res.send(result);
 });

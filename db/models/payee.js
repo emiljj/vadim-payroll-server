@@ -6,7 +6,7 @@ const payeeSchema = new Schema({
   jobTitle: Schema.Types.String,
   email: Schema.Types.String,
   address: Schema.Types.String,
-  roles: Schema.Types.Array,
+  roles: [Schema.Types.String],
   age: Schema.Types.Number,
   withHoldingTax: Schema.Types.Number,
   active: Schema.Types.Boolean,
