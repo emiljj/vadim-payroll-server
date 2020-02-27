@@ -9,5 +9,5 @@ const connectDB = () => {
   db.once('open', () => {
     console.log('Connected to the DB...');
   });
-}
+};
 module.exports = connectDB;

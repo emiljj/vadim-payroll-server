@@ -9,20 +9,19 @@ payeeRouter.get('/', async (req, res) => {
 });
 
 payeeRouter.get('/:id', async (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   const result = await Payee.findById(id);
   res.send(result);
 });
 
 payeeRouter.post('/', async (req, res) => {
   const result = await Payee.create(req.body);
- console.log("CREATE",result)
   res.send(result);
 });
 
 payeeRouter.put('/:id', async (req, res) => {
-  const id = req.params.id;
-  const result = await Payee.findByIdAndUpdate(id,req.body);
+  const { id } = req.params;
+  const result = await Payee.findByIdAndUpdate(id, req.body);
   res.send(result);
 });
 
