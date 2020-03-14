@@ -15,8 +15,12 @@ payeeRouter.get('/:id', async (req, res) => {
 });
 
 payeeRouter.post('/', async (req, res) => {
-  console.log(req.body.roles);
-  const result = await Payee.create(req.body);
+  const payee = { ...req.body };
+  payee.active = false;
+  if (!payee.roles || !payee.roles.length) {
+    payee.roles = ['USER'];
+  }
+  const result = await Payee.create(payee);
   res.send(result);
 });
 
