@@ -32,9 +32,8 @@ payeeRouter.put('/:id', async (req, res) => {
 
 payeeRouter.put('/activate/:id', async (req, res) => {
   const { id } = req.params;
-  const result = await Payee.findByIdAndUpdate(id, req.body.active);
+  const result = await Payee.findByIdAndUpdate(id, req.body);
   res.send(result);
-  console.log('===><>', result);
 });
 
 payeeRouter.delete('/:id', async (req, res) => {
