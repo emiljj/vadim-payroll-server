@@ -30,6 +30,13 @@ payeeRouter.put('/:id', async (req, res) => {
   res.send(result);
 });
 
+payeeRouter.put('/activate/:id', async (req, res) => {
+  const { id } = req.params;
+  const result = await Payee.findByIdAndUpdate(id, req.body.active);
+  res.send(result);
+  console.log('===><>', result);
+});
+
 payeeRouter.delete('/:id', async (req, res) => {
   const paramsId = req.params.id;
   const result = await Payee.findOneAndDelete({ _id: paramsId });
