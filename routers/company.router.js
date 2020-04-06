@@ -1,5 +1,7 @@
 const { Router } = require('express');
+const jwt = require('jsonwebtoken');
 const Company = require('../db/models/company');
+const config = require('../config');
 
 const companyRouter = Router();
 
@@ -9,12 +11,21 @@ companyRouter.get('/', async (req, res) => {
   console.log(result);
 });
 
-companyRouter.post('/login-admin/:id', async (req, res) => {
-  const company = { ...req.body };
-  console.log('sfssf', company);
-  const result = await Company.create(company);
-  res.send(console.log(result));
+companyRouter.post('/login-admin', async (req, res) => {
+  const { companyId, password } = req.body;
+  const company = await Company.findById(companyId);
+
+  if (!company) {
+    return res.send('Wrong companyId');
+  }
+  if (company.password !== password) {
+    return res.send('Wrong password');
+  }
+
+  const token = jwt.sign({ ...company }, config.secretKey);
+  return res.send({ company, token });
 });
+
 
 companyRouter.get('/:id', async (req, res) => {
   const { id } = req.params;

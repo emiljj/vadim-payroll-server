@@ -8,7 +8,6 @@ const companySchema = new Schema({
   countOfPayees: Schema.Types.Number,
   name: Schema.Types.String,
   password: Schema.Types.String,
-  companyID: Schema.Types.String,
 });
 
 const Company = model('company', companySchema);
