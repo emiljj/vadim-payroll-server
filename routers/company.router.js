@@ -16,10 +16,10 @@ companyRouter.post('/login-admin', async (req, res) => {
   const company = await Company.findById(companyId);
 
   if (!company) {
-    return res.send('Wrong companyId');
+    return res.status(400).send('Wrong companyId');
   }
   if (company.password !== password) {
-    return res.send('Wrong password');
+    return res.status(400).send('Wrong password');
   }
 
   const token = jwt.sign({ ...company }, config.secretKey);
