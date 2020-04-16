@@ -13,13 +13,13 @@ companyRouter.get('/', async (req, res) => {
 
 companyRouter.post('/login-admin', async (req, res) => {
   const { companyId, password } = req.body;
-  const company = await Company.findById(companyId);
+  const company = await Company.findOne({ _id: companyId });
 
   if (!company) {
-    return res.status(400).send('Wrong companyId');
+    return res.status(400).json('Wrong company ID');
   }
   if (company.password !== password) {
-    return res.status(400).send('Wrong password');
+    return res.status(400).json('Wrong password');
   }
 
   const token = jwt.sign({ ...company }, config.secretKey);
