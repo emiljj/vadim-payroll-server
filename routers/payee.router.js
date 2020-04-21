@@ -15,11 +15,22 @@ payeeRouter.get('/:id', async (req, res) => {
 });
 
 payeeRouter.post('/', async (req, res) => {
-  const result = await Payee.create(req.body);
+  const payee = { ...req.body };
+  payee.active = false;
+  if (!payee.roles || !payee.roles.length) {
+    payee.roles = ['USER'];
+  }
+  const result = await Payee.create(payee);
   res.send(result);
 });
 
 payeeRouter.put('/:id', async (req, res) => {
+  const { id } = req.params;
+  const result = await Payee.findByIdAndUpdate(id, req.body);
+  res.send(result);
+});
+
+payeeRouter.put('/activate/:id', async (req, res) => {
   const { id } = req.params;
   const result = await Payee.findByIdAndUpdate(id, req.body);
   res.send(result);
